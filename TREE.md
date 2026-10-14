@@ -1,6 +1,6 @@
 # Repository tree
 
-Delivered files; generated build output and local Git metadata are excluded. Planned feature packages are not scaffolded.
+Delivered files; generated build output and local Git metadata are excluded. Only the `event` package exists; other planned feature packages are not scaffolded.
 
 ```text
 iletka/
@@ -33,14 +33,19 @@ iletka/
 │   │   ├── java/
 │   │   │   └── com/
 │   │   │       └── iletka/
-│   │   │           └── IletkaApplication.java
+│   │   │           ├── IletkaApplication.java
+│   │   │           └── event/
+│   │   │               ├── EventType.java
+│   │   │               └── InvalidEventTypeException.java
 │   │   └── resources/
 │   │       └── application.properties
 │   └── test/
 │       └── java/
 │           └── com/
 │               └── iletka/
-│                   └── IletkaApplicationTests.java
+│                   ├── IletkaApplicationTests.java
+│                   └── event/
+│                       └── EventTypeTest.java
 ├── .editorconfig
 ├── .gitattributes
 ├── .gitignore

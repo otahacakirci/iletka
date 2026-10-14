@@ -31,7 +31,7 @@ java --version
 
 These are session-local environment changes. Confirm Maven reports Java 21 before building. `.java-version` is a hint for compatible version managers; it does not install or enforce a JDK.
 
-The delivered project folder has a local Git repository with the starter staged and no commits. Review the files and make your own baseline commit before the first feature task. The portable ZIP deliberately excludes `.git`; after extracting it, run `git init -b main` if you want Git tracking. No remote is required to begin with Claude Code.
+The repository has its baseline commits on `main`, and `origin` points to `https://github.com/otahacakirci/iletka.git` (checked locally with `git remote -v`). Feature work uses short-lived branches such as `feature/event-type-validation`. The portable ZIP deliberately excludes `.git`; after extracting it, run `git init -b main` if you want Git tracking. A GitHub remote existing does not show that its CI run passed; check the Actions result on GitHub.
 
 ## Canonical commands
 
@@ -44,7 +44,7 @@ Run from the repository root. Windows uses `.\mvnw.cmd`; replace it with `./mvnw
 | Run bootstrap after verify | `java -jar target/iletka-0.0.1-SNAPSHOT.jar` |
 | Run one test class | `.\mvnw.cmd -Dtest=IletkaApplicationTests test` |
 
-Expected current behavior: Spring logs `Started IletkaApplication` and exits with code 0. There is no web server or API route. The context smoke test verifies application wiring only, not routing, persistence, delivery or security. Test reports appear under ignored `target/surefire-reports/`.
+Test classes: `IletkaApplicationTests` (context smoke) and `EventTypeTest` (plain unit tests, no Spring). Expected current behavior: Spring logs `Started IletkaApplication` and exits with code 0. There is no web server or API route. The context smoke test verifies application wiring only, not routing, persistence, delivery or security. Test reports appear under ignored `target/surefire-reports/`.
 
 The jar output timestamp is fixed for repeatable archives. Dependency versions are pinned through the Boot parent and wrapper. Reproducibility across different operating systems or JDK patch versions must be measured, not assumed.
 
@@ -68,7 +68,7 @@ Keep real keys, signing secrets, decrypted values and production URLs out of com
 
 ## Troubleshooting
 
-- Wrong JDK: compare `java --version` and wrapper `--version`; correct `JAVA_HOME` and PATH rather than lowering the Java target.
+- Wrong JDK: the machine's default `java` may be newer than 21 (a Java 25 default was seen); compare `java --version` and wrapper `--version`; correct `JAVA_HOME` and PATH rather than lowering the Java target.
 - Download failure: check your network/proxy or approved Maven mirror. Do not disable TLS/checksum validation or manufacture a successful build report.
 - Linux permission error after unpacking a ZIP: run `chmod +x mvnw`; the Git index records the executable flag.
 - No response at localhost: expected at this milestone; the bootstrap is non-web.

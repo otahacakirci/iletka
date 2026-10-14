@@ -49,10 +49,6 @@ See [the full repository tree](TREE.md) for the delivered files. Feature package
 
 Open a terminal in this folder and run `claude` using your installed, authenticated Claude Code client. Its root instructions are [CLAUDE.md](CLAUDE.md); detailed documents are read only for the task at hand. Check effective permissions with `/permissions`.
 
-Suggested first request:
-
-> Güncel durum belgesini ve yol haritasındaki EventType görevini oku. Doğrulama politikasını kısaca açıkla; yalnız bu immutable Java değerini ve odaklı birim testlerini geliştir. REST, persistence veya teslimat kodu ekleme. Testleri çalıştır, sonucu ve öğrendiğim Java kavramını Türkçe açıkla; durum kaydını güncelle.
-
 ## Repository decisions
 
 One Maven module keeps builds and learning manageable. Future code grows by feature under `com.iletka`, introducing internal layers when real behavior needs them. No placeholder services or unused infrastructure dependencies are committed. API, relay and worker may later run as separate roles of the same codebase without an early microservice split.
