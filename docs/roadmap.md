@@ -125,8 +125,8 @@ This is a task definition, not an implementation or a statement of completion. T
 
 **Goal:** Introduce one small immutable Java value for an event type, with validation independent of Spring.
 
-**Initial policy:** Reject null, blank text, leading/trailing whitespace, and values longer than 128 characters. Preserve the exact accepted text and its case; do not silently trim or lowercase it. Additional character restrictions require a documented domain decision rather than an accidental controller rule.
+**Policy:** Follow the [EventType domain decision](project-contract.md#domain-decision-eventtype-validation): 1-128 ASCII letters, digits, `.`, `_` and `-`; first and last character alphanumeric; no repeated dots and no adjacent different separators. Preserve the exact accepted text and its case; do not silently trim or lowercase it. Every violation, including null, raises `InvalidEventTypeException`.
 
-**Acceptance evidence:** Unit tests cover a valid value such as report.completed, case preservation, null/empty/whitespace input, surrounding whitespace, and the length boundary. Invalid construction has one clear, documented error behavior. Equality uses the exact accepted value.
+**Acceptance evidence:** Unit tests (no Spring context) cover valid names such as `report.completed`, single characters, case preservation, permitted `_`/`-` repeats, all six forbidden separator pairs, repeated dots, leading/trailing separators, null/empty/whitespace/disallowed and invisible Unicode characters, trailing line breaks, and the 127/128/129 length boundary. Equality and hash code use the exact accepted value.
 
 **Scope:** A value type and its focused unit tests only. Do not add REST endpoints, storage, RabbitMQ, an HTTP client, or wider delivery behavior for this task.
